@@ -8,6 +8,7 @@ class TestdatamakerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Unit test run!");
 	}
 
 }

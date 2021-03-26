@@ -15,12 +15,55 @@
 	<description>Creates GDPR-free test data</description>
 	<properties>
 		<java.version>16</java.version>
+	    <io-rest-assured.version>4.3.3</io-rest-assured.version>
+     	<groovy.version>3.0.7</groovy.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${io-rest-assured.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!--Added required depeendencies due to : https://github.com/rest-assured/rest-assured/issues/1168 -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured-common</artifactId>
+			<version>${io-rest-assured.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${io-rest-assured.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>xml-path</artifactId>
+			<version>${io-rest-assured.version}</version>
+		</dependency>
+		<dependency>
+           <groupId>org.codehaus.groovy</groupId>
+           <artifactId>groovy</artifactId>
+           <version>${groovy.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>org.codehaus.groovy</groupId>
+           <artifactId>groovy-xml</artifactId>
+           <version>${groovy.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>org.codehaus.groovy</groupId>
+           <artifactId>groovy-json</artifactId>
+           <version>${groovy.version}</version>
+       </dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,6 +78,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 		</plugins>
 	</build>
 
