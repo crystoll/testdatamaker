@@ -11,9 +11,15 @@ class TestdatamakerApplicationIT {
 	@Test
 	void contextLoads() {
 		when().
-			get("/greeting").
+			get("/people").
 		then().
-			statusCode(200);
+			statusCode(200)
+			.and()
+			.body(
+				"firstName", notNullValue(),
+				"lastName", notNullValue(),
+				"email", notNullValue()
+			);
 	}
 
 }
