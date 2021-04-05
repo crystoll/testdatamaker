@@ -8,3 +8,8 @@ public record Person(@JsonProperty("firstName") String firstName, @JsonProperty(
 		@JsonProperty("email") String email) {
 }
 
+
+
+
+
+

@@ -18,8 +18,7 @@ public class TestData {
     public TestData() {
     }
 
-    public TestData(Long id, String data) {
-        this.id = id;
+    public TestData(String data) {
         this.data = data;
     }
 
