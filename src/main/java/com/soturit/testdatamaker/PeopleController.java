@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PeopleController {
 
-	// @RequestParam(value = "name", defaultValue = "World") String name
+	private final TestDataRepository repository;
+
+
+	public PeopleController(TestDataRepository repository) {
+		this.repository = repository;
+	}
 	
+
 	@GetMapping("/people")
 	public Person greeting() {
+		System.out.println(repository.findAll());
 		return new Person("Donald","Duck","don.duck@gmail.com");
 	}
 }
