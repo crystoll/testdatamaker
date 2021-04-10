@@ -15,9 +15,10 @@ class LoadDatabase {
   CommandLineRunner initDatabase(TestDataRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new TestData("Bilbo")));
-      log.info("Preloading " + repository.save(new TestData("Frodo")));
-      log.info("Preloading " + repository.save(new TestData("Meriadoc")));
+      log.info("Preloading " + repository.save(new TestData("Bilbo",DataType.FIRST_NAME)));
+      log.info("Preloading " + repository.save(new TestData("Frodo",DataType.FIRST_NAME)));
+      log.info("Preloading " + repository.save(new TestData("Meriadoc",DataType.FIRST_NAME)));
+      log.info("Preloading " + repository.save(new TestData("Baggins",DataType.LAST_NAME)));
     };
   }
 }

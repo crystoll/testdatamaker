@@ -1,5 +1,6 @@
 package com.soturit.testdatamaker;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -17,10 +18,12 @@ public class PeopleController {
 	}
 
 	@GetMapping("/people")
-	public Person greeting() {
+	public List<Person> greeting() {
 		var allTestData = repository.findAll();
 		var rand = new Random();
 		var randomFirstName = allTestData.get(rand.nextInt(allTestData.size())).getData();
-		return new Person(randomFirstName, "Duck", "don.duck@gmail.com");
+		var person = new Person(randomFirstName, "Duck", "don.duck@gmail.com");
+		var people = List.of(person);
+		return people;
 	}
 }
