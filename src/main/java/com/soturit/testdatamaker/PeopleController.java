@@ -1,5 +1,6 @@
 package com.soturit.testdatamaker;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -13,17 +14,28 @@ public class PeopleController {
 
 	private final TestDataRepository repository;
 
+	private Random rand = new Random();
+
 	public PeopleController(TestDataRepository repository) {
 		this.repository = repository;
 	}
 
+	private String getRandomDataValue(List<TestData> data) {
+		return data.get(rand.nextInt(data.size())).getData();
+	}
+
 	@GetMapping("/people")
 	public List<Person> greeting() {
-		var allTestData = repository.findAll();
-		var rand = new Random();
-		var randomFirstName = allTestData.get(rand.nextInt(allTestData.size())).getData();
-		var person = new Person(randomFirstName, "Duck", "don.duck@gmail.com");
-		var people = List.of(person);
+		var allFirstNames = repository.findAllByDataType(DataType.FIRST_NAME);
+		var allLastNames = repository.findAllByDataType(DataType.LAST_NAME);
+		var people = new ArrayList<Person>();
+		for (int i=0;i<10;i++) {
+			var randomFirstName = getRandomDataValue(allFirstNames);
+			var randomLastName = getRandomDataValue(allLastNames);
+			var randomEmail = randomFirstName + "." + randomLastName + "@gmail.com";
+			var person = new Person(randomFirstName, randomLastName, randomEmail);	
+			people.add(person);				
+		}
 		return people;
 	}
 }

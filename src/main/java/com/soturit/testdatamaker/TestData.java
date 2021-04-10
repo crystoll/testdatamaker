@@ -10,9 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-enum DataType {
-    FIRST_NAME, LAST_NAME, STREET_NAME
-}
+
 
 @Entity
 public class TestData {
