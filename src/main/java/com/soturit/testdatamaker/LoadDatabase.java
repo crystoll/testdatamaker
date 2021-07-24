@@ -1,5 +1,7 @@
 package com.soturit.testdatamaker;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +17,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
+
+
 
 @Configuration
 class LoadDatabase {
@@ -40,8 +45,8 @@ class LoadDatabase {
 
   private List<TestData> loadTestDataFromCSV(String fileName, DataType dataType) throws FileNotFoundException, IOException, CsvException {
     var lastNamesFile = new ClassPathResource(fileName);
-    try (var fileReader = new FileReader(lastNamesFile.getFile())) {
-      var allRows = new CSVReaderHeaderAware(fileReader).readAll();
+    try (var csvFileReader = new CSVReaderHeaderAware(new BufferedReader(new InputStreamReader(lastNamesFile.getInputStream())))) {
+      var allRows = csvFileReader.readAll();
       log.info("Loaded " + allRows.size() + " rows from csv");
       var lastNamesTestData = allRows.stream().
         map(v -> new TestData(v[0],dataType))
@@ -49,5 +54,6 @@ class LoadDatabase {
       log.info("Converted " + lastNamesTestData.size() + " rows from csv");          
       return lastNamesTestData;
     }
+ 
   }
 }
