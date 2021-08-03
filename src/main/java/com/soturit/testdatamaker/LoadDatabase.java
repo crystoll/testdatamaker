@@ -32,14 +32,18 @@ class LoadDatabase {
     return args -> {
       
       var lastNames = loadTestDataFromCSV("lastnames.csv",DataType.LAST_NAME);
-      lastNames.forEach(v -> log.info("Preloading " + repository.save(v)));
+      // lastNames.forEach(v -> log.info("Preloading " + repository.save(v)));
+      lastNames.forEach(v -> repository.save(v));
       
       var maleFirstNames = loadTestDataFromCSV("male_firstnames.csv",DataType.FIRST_NAME);
-      maleFirstNames.forEach(v -> log.info("Preloading " + repository.save(v)));
+      maleFirstNames.forEach(v -> repository.save(v));
+      // maleFirstNames.forEach(v -> log.info("Preloading " + repository.save(v)));
 
       var femaleFirstNames = loadTestDataFromCSV("female_firstnames.csv",DataType.FIRST_NAME);
-      femaleFirstNames.forEach(v -> log.info("Preloading " + repository.save(v)));
+      femaleFirstNames.forEach(v -> repository.save(v));
+      // femaleFirstNames.forEach(v -> log.info("Preloading " + repository.save(v)));
 
+      log.info("Preloaded a bunch of data from csv files, ready to serve.");
     };
   }
 
